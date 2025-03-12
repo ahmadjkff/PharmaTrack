@@ -1,0 +1,48 @@
+<odoo>
+    <record id="doctor_daily_report" model="ir.actions.report">
+        <field name="name">Doctor Daily Report</field>
+        <field name="model">doctor</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="binding_model_id" ref="model_doctor"/>
+        <field name="binding_type">report</field>
+        <field name="report_name">medical_management.doctor_daily_report_template</field>
+    </record>
+
+    <template id="doctor_daily_report_template">
+        <t t-call="web.html_container"/>
+        <t t-call="web.external_layout">
+
+            <div class="text-center">
+                <h2>Today's Appointments Report</h2>
+                <p>Date: <t t-esc="time.strftime('%Y-%m-%d')"/></p>
+            </div>
+
+            <t t-foreach="docs" t-as="doctor">
+                <h3>Doctor: <t t-esc="doctor.name"/></h3>
+                <p>Specialization: <t t-esc="doctor.specialization"/></p>
+
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th>Patient</th>
+                            <th>Appointment Date</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <t t-set="today" t-value="time.strftime('%Y-%m-%d')"/>
+                        <t t-foreach="doctor.appointment_ids" t-as="o">
+                            <t t-if="o.appointment_date.strftime('%Y-%m-%d') == today">
+                                <tr>
+                                    <td><t t-esc="o.patient_id.name"/></td>
+                                    <td><t t-esc="o.appointment_date"/></td>
+                                    <td><t t-esc="o.status"/></td>
+                                </tr>
+                            </t>
+                        </t>
+                    </tbody>
+                </table>
+            </t>
+        </t>
+    </template>
+</odoo>

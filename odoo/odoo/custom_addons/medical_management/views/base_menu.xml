@@ -1,0 +1,52 @@
+<odoo>
+    <menuitem
+        id="medical_root_menu"
+        name="Medical Management"
+        sequence="1"
+    />
+
+    <menuitem
+        id="doctor_menu"
+        name="Doctors"
+        parent="medical_root_menu"
+        action="doctor_model_action"
+        sequence="2"
+        groups="medical_management.medical_admin_group"
+    />
+
+    <menuitem
+        id="patient_menu"
+        name="Patients"
+        parent="medical_root_menu"
+        action="patient_model_action"
+        sequence="3"
+        groups="medical_management.medical_admin_group"
+    />
+
+    <menuitem
+        id="appointment_menu"
+        name="Appointment"
+        parent="medical_root_menu"
+        action="appointment_model_action"
+        sequence="4"
+
+    />
+
+    <menuitem
+        id="prescription_menu"
+        name="Prescription"
+        parent="medical_root_menu"
+        action="prescription_model_action"
+        sequence="5"
+        groups="medical_management.medical_admin_group,medical_management.medical_doctor_group"
+    />
+
+    <menuitem
+        id="medication_menu"
+        name="Medication"
+        parent="medical_root_menu"
+        action="medication_model_action"
+        sequence="6"
+        groups="medical_management.medical_admin_group"
+    />
+</odoo>

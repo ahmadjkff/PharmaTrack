@@ -1,0 +1,78 @@
+<odoo>
+    <record id="doctor_list_view" model="ir.ui.view">
+        <field name="name">doctor.list</field>
+        <field name="model">doctor</field>
+        <field name="arch" type="xml">
+            <list decoration-danger="not available" decoration-success="available">
+                <field name="name"/>
+                <field name="specialization"/>
+                <field name="email"/>
+                <field name="available"/>
+                <field name="phone" optional="1"/>
+                <field name="appointments_count" optional="1"/>
+                <field name="license_number" optional="1"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="doctor_form_view" model="ir.ui.view">
+        <field name="name">doctor.form</field>
+        <field name="model">doctor</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <div class="oe_title">
+                        <label for="name"/>
+                        <h1>
+                            <field name="name"/>
+                        </h1>
+                    </div>
+                    <group string="General Info.">
+                        <field name="specialization"/>
+                        <field name="phone"/>
+                        <field name="appointments_count"/>
+                        <field name="email"/>
+                        <field name="license_number"/>
+                        <field name="available"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="doctor_model_action" model="ir.actions.act_window">
+        <field name="name">doctors</field>
+        <field name="res_model">doctor</field>
+        <field name="view_mode">list,form</field>
+    </record>
+
+    <record id="doctor_view_search" model="ir.ui.view">
+        <field name="name">Doctor search</field>
+        <field name="model">doctor</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="name"/>
+                <field name="email"/>
+
+                <filter string="Cardiologist" name="cardiologist"
+                   domain="[('specialization', '=', 'cardiologist')]"/>
+
+                <filter string="Dentist" name="dentist"
+                   domain="[('specialization', '=', 'dentist')]"/>
+
+                <filter string="General Physician" name="general_physician"
+                   domain="[('specialization', '=', 'general_physician')]"/>
+
+                <filter string="Available" name="available"
+                   domain="[('available', '=', True)]"/>
+
+               <group expand="0" string="Available">
+                    <filter string="Available" name="available"
+                       context="{'group_by':'available'}"/>
+               </group>
+
+            </search>
+        </field>
+    </record>
+
+</odoo>

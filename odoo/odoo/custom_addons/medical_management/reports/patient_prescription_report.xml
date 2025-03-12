@@ -1,0 +1,77 @@
+<odoo>
+    <record id="patient_prescription_report" model="ir.actions.report">
+        <field name="name">Patient Prescription Report</field>
+        <field name="model">patient</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="binding_model_id" ref="model_patient"/>
+        <field name="binding_type">report</field>
+        <field name="report_name">medical_management.patient_prescription_report_template</field>
+    </record>
+
+    <template id="patient_prescription_report_template">
+        <t t-call="web.html_container"/>
+        <t t-call="web.external_layout">
+
+            <!-- Report Header -->
+            <div class="text-center py-4">
+                <h2 class="font-weight-bold">Patient Prescription Report</h2>
+                <p class="text-muted">Date: <t t-esc="time.strftime('%Y-%m-%d')"/></p>
+            </div>
+
+            <t t-foreach="docs" t-as="patient">
+                <!-- Patient Information Section -->
+                <div class="my-3">
+                    <h3 class="font-weight-bold">Patient Details</h3>
+                    <p><strong>Name:</strong> <t t-esc="patient.name"/></p>
+                    <p><strong>Gender:</strong> <t t-esc="patient.gender"/></p>
+                    <p><strong>Date of Birth:</strong> <t t-esc="patient.dob"/></p>
+                </div>
+
+                <!-- Prescription Table Section -->
+                <h4 class="font-weight-bold">Prescriptions</h4>
+                <table class="table table-bordered mt-3">
+                    <thead class="thead-light">
+                        <tr>
+                            <th>Doctor</th>
+                            <th>Medications</th>
+                            <th>Dosage</th>
+                            <th>Duration</th>
+                            <th>Date Issued</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- Loop through the appointments of the patient -->
+                        <t t-foreach="patient.appointment_ids" t-as="appointment">
+                            <!-- Loop through the prescriptions related to each appointment -->
+                            <t t-foreach="appointment.prescription_id" t-as="prescription">
+                                <tr>
+                                    <td><t t-esc="prescription.doctor_id.name"/></td>
+
+                                    <!-- Loop through the medications of each prescription -->
+                                    <td>
+                                        <t t-foreach="prescription.medications" t-as="medication">
+                                            <p><t t-esc="medication.name"/></p>
+                                        </t>
+                                    </td>
+                                    <td>
+                                        <t t-foreach="prescription.medications" t-as="medication">
+                                            <p><t t-esc="medication.dosage"/></p>
+                                        </t>
+                                    </td>
+                                    <td>
+                                        <t t-foreach="prescription.medications" t-as="medication">
+                                            <p><t t-esc="medication.duration"/></p>
+                                        </t>
+                                    </td>
+                                    <td><t t-esc="prescription.date_issued"/></td>
+                                </tr>
+                            </t>
+                        </t>
+                    </tbody>
+                </table>
+            </t>
+        </t>
+    </template>
+
+
+</odoo>

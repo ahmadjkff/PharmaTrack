@@ -1,0 +1,10 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_doctor,access_doctor,model_doctor,,1,1,1,1
+access_patient,access.patient,model_patient,,1,1,1,1
+access_appointment_admin,Access Appointment (Admin),model_appointment,medical_management.medical_admin_group,1,1,1,1
+access_appointment_doctor,Access Appointment (Doctor),model_appointment,medical_management.medical_doctor_group,1,1,0,0
+access_appointment_receptionist,Access Appointment (Receptionist),model_appointment,medical_management.medical_receptionist_group,1,1,1,1
+access_prescription_admin,Access Prescription (Admin),model_prescription,medical_management.medical_admin_group,1,1,1,1
+access_prescription_doctor,Access Prescription (Doctor),model_prescription,medical_management.medical_doctor_group,1,1,0,0
+access_prescription_receptionist,Access Prescription (Receptionist),model_prescription,medical_management.medical_receptionist_group,1,0,0,0
+access_medication,access.medication,model_medication,,1,1,1,1

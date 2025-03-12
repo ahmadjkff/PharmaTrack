@@ -1,0 +1,21 @@
+{
+    'name': 'Medical Management',
+    'author': 'Ahmad Jamil',
+    'category': 'Medical',
+    'version': '18.0.0.1.0',
+    'depends': ['base', 'mail'],
+    'data': [
+        'security/security.xml',
+        'security/ir.model.access.csv',
+        'views/patient_view.xml',
+        'views/doctor_view.xml',
+        'views/appoinment_view.xml',
+        'views/prescription_view.xml',
+        'views/medication_view.xml',
+        'views/base_menu.xml',
+        'reports/doctor_daily_report.xml',
+        'reports/doctor_weekly_report.xml',
+        'reports/patient_prescription_report.xml',
+    ],
+    'application': True,
+}

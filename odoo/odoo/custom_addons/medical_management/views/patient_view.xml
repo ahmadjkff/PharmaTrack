@@ -1,0 +1,49 @@
+<odoo>
+    <record id="patient_list_view" model="ir.ui.view">
+            <field name="name">patient.list</field>
+            <field name="model">patient</field>
+            <field name="arch" type="xml">
+                <list>
+                    <field name="name"/>
+                    <field name="dob" string="Date of birth"/>
+                    <field name="gender"/>
+                    <field name="phone" optional="1"/>
+                    <field name="email"/>
+                    <field name="address" optional="1"/>
+                    <field name="medical_history" optional="1"/>
+                    <field name="appointments_count" optional="1"/>
+                </list>
+            </field>
+        </record>
+
+     <record id="patient_form_view" model="ir.ui.view">
+        <field name="name">patient.form</field>
+        <field name="model">patient</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <div class="oe_title">
+                        <label for="name"/>
+                        <h1>
+                            <field name="name"/>
+                        </h1>
+                    </div>
+                    <group string="General Info.">
+                        <field name="dob"/>
+                        <field name="gender"/>
+                        <field name="email"/>
+                        <field name="address"/>
+                        <field name="medical_history"/>
+                        <field name="appointments_count"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="patient_model_action" model="ir.actions.act_window">
+        <field name="name">patients</field>
+        <field name="res_model">patient</field>
+        <field name="view_mode">list,form</field>
+    </record>
+</odoo>
